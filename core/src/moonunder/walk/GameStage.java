@@ -13,7 +13,7 @@ public class GameStage extends Stage {
     protected Runner runner;
     protected ArrayList<GameActor> gameActors;
     protected GameActorMovementManager movementManager;
-    protected static final float CAMERA_SPEED = -1.0f;
+    protected static final float CAMERA_SPEED = GameActor.transformToScreen(1.0f);
 
     public GameStage() {
         gameActors = new ArrayList<GameActor>();
@@ -21,13 +21,15 @@ public class GameStage extends Stage {
         runner = new Runner(new Vector(0, 3));
 
         Ground ground = new Ground(new Vector(0, 0), new Vector(10, 2));
-        Milk milk = new Milk(new Vector(6, 6));
-        Ventilation ventilation = new Ventilation(new Vector(5, 2), new Vector(2, 1));
+        Milk milk = new Milk(new Vector(6, 10));
+        Ventilation ventilation = new Ventilation(new Vector(5, 4), new Vector(2, 1.5f));
+        Trumpet trumpet = new Trumpet(new Vector(8, 2), new Vector(1, 1));
 
         addActor(runner);
         addActor(ventilation);
         addActor(ground);
         addActor(milk);
+        addActor(trumpet);
 
         runner.setZIndex(ventilation.getZIndex() + 1);
 
@@ -35,6 +37,7 @@ public class GameStage extends Stage {
         gameActors.add(ground);
         gameActors.add(milk);
         gameActors.add(ventilation);
+        gameActors.add(trumpet);
 
         Gdx.input.setInputProcessor(this);
     }
@@ -47,14 +50,27 @@ public class GameStage extends Stage {
             }
         }
 
+        getCamera().translate(CAMERA_SPEED * delta, 0, 0);
+
         ArrayList<Collision> collisions = movementManager.move(gameActors, 6, delta);
         for (Collision collision : collisions) {
             onCollision(collision);
         }
 
-        for (GameActor actor : gameActors) {
-            if (actor != runner) {
-                actor.setBox(actor.getBox().move(new Vector(CAMERA_SPEED * delta, 0)));
+        float cameraX = GameActor.transformFromScreen(getCamera().position.x - getWidth() / 2);
+        float w = cameraX - runner.getBox().getPosition()._x;
+        if (w > 0) {
+            boolean collides = false;
+            for (GameActor actor : gameActors) {
+                if (actor != runner && !actor._passable && Box.overlaps(runner.getBox(), actor.getBox())) {
+                    collides = true;
+                }
+            }
+            if (!collides)
+                runner.setBox(runner.getBox().move(new Vector(w, 0)));
+            else if (w > runner.getBox().getSize()._x) {
+                System.out.println("JOPA");
+                runner.setBox(runner.getBox().move(new Vector(w, 10)));
             }
         }
 
@@ -63,7 +79,6 @@ public class GameStage extends Stage {
 
     public void onCollision(Collision collision) {
         if (collision.getActorA() instanceof Runner) {
-
             Runner runner = (Runner) collision.getActorA();
 
             if (collision.getActorB() instanceof Ground) {
@@ -72,7 +87,7 @@ public class GameStage extends Stage {
             }
 
             if (collision.getActorB() instanceof Food) {
-                System.out.println("I EAT FOODDDD!!!");
+                System.out.println("I EAT FOODDDD!!!1");
                 gameActors.remove(collision.getActorB());
                 collision.getActorB().remove();
                 return;
@@ -87,7 +102,7 @@ public class GameStage extends Stage {
             if (collision.getActorB() instanceof Runner) {
                 Runner runner = (Runner) collision.getActorB();
 
-                System.out.println("I EAT FOODDDD!!!");
+                System.out.println("I EAT FOODDDD!!!2");
                 gameActors.remove(food);
                 food.remove();
                 return;

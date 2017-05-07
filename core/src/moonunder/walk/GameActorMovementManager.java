@@ -33,8 +33,6 @@ public class GameActorMovementManager {
         Vector speedX = new Vector(speed.getX(), 0);
         Vector speedY = new Vector(0, speed.getY());
 
-        float length = speed.length();
-
         ArrayList<Collision> collisions = new ArrayList<Collision>();
         LinkedHashSet<GameActor> collideSet = new LinkedHashSet<GameActor>();
 

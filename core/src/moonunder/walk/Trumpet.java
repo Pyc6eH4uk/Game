@@ -14,6 +14,7 @@ public class Trumpet extends Obstacle {
         super(position, size);
 
         this.sprite = new Sprite(new Texture(Gdx.files.internal("obstacles/trumpet.png")));
+        _passable = false;
     }
-    
+
 }

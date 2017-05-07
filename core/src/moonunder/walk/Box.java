@@ -33,12 +33,11 @@ public class Box {
     }
 
     static public boolean overlaps(Box a, Box b) {
-        return !(
-                a._position.getX() + a._size.getX() < b._position.getX() ||
-                        a._position.getX() > b._position.getX() + b._size.getX() ||
-                        a._position.getY() > b._position.getY() + b._size.getY() ||
-                        a._position.getY() + a._size.getY() < b._size.getY()
-        );
+        if (a._position.getX() + a._size.getX() < b._position.getX() ||
+                 a._position.getX() > b._position.getX() + b._size.getX() ||
+                 a._position.getY() > b._position.getY() + b._size.getY() ||
+                 a._position.getY() + a._size.getY() < b._position.getY()) return  false;
+        return true;
     }
 
 
