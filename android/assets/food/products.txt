@@ -1,0 +1,19 @@
+products.png
+size: 552, 234
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 0, 0
+  size: 345, 208
+  orig: 345, 208
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 345, 0
+  size: 207, 234
+  orig: 207, 234
+  offset: 0, 0
+  index: -1

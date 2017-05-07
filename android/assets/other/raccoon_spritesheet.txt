@@ -1,0 +1,26 @@
+raccoon_spritesheet.png
+size: 800, 1608
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+raccoon
+  rotate: false
+  xy: 0, 0
+  size: 800, 536
+  orig: 800, 536
+  offset: 0, 0
+  index: -1
+raccoon_falling
+  rotate: false
+  xy: 0, 536
+  size: 800, 536
+  orig: 800, 536
+  offset: 0, 0
+  index: -1
+raccoon_in_air
+  rotate: false
+  xy: 0, 1072
+  size: 800, 536
+  orig: 800, 536
+  offset: 0, 0
+  index: -1

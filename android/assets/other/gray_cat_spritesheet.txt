@@ -1,0 +1,67 @@
+gray_cat_spritesheet-0.png
+size: 1600, 1114
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gray_cat
+  rotate: false
+  xy: 0, 0
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
+gray_cat_jumping1
+  rotate: false
+  xy: 800, 0
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
+gray_cat_running1
+  rotate: false
+  xy: 0, 557
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
+gray_cat_running2
+  rotate: false
+  xy: 800, 557
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
+
+gray_cat_spritesheet-1.png
+size: 1600, 1114
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gray_cat_jumping2
+  rotate: false
+  xy: 0, 0
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
+gray_cat_jumping3
+  rotate: false
+  xy: 800, 0
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
+gray_cat_running3
+  rotate: false
+  xy: 0, 557
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
+gray_cat_running4
+  rotate: false
+  xy: 800, 557
+  size: 800, 557
+  orig: 800, 557
+  offset: 0, 0
+  index: -1
