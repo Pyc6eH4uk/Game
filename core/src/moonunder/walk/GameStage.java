@@ -1,6 +1,12 @@
 package moonunder.walk;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.ArrayList;
@@ -10,40 +16,33 @@ import java.util.ArrayList;
  */
 
 public class GameStage extends Stage {
+    protected static final float CAMERA_SPEED = GameActor.transformToScreen(1.0f);
+    protected GameActorMovementManager movementManager;
+    protected Generator generator;
+
     protected Runner runner;
     protected ArrayList<GameActor> gameActors;
-    protected GameActorMovementManager movementManager;
-    protected static final float CAMERA_SPEED = GameActor.transformToScreen(1.0f);
+    protected Background background;
 
     public GameStage() {
+
+        background = new Background(new Box(new Vector(0, 0), new Vector(GameActor.transformFromScreen(getWidth()), GameActor.transformFromScreen(getHeight()))), new Vector(0.5f, 0));
+
         gameActors = new ArrayList<GameActor>();
         movementManager = new GameActorMovementManager();
+        generator = new Generator(getCamera());
         runner = new Runner(new Vector(0, 3));
 
-        Ground ground = new Ground(new Vector(0, 0), new Vector(10, 2));
-        Milk milk = new Milk(new Vector(6, 10));
-        Ventilation ventilation = new Ventilation(new Vector(5, 4), new Vector(2, 1.5f));
-        Trumpet trumpet = new Trumpet(new Vector(8, 2), new Vector(1, 1));
-
+        addActor(background);
         addActor(runner);
-        addActor(ventilation);
-        addActor(ground);
-        addActor(milk);
-        addActor(trumpet);
-
-        runner.setZIndex(ventilation.getZIndex() + 1);
-
         gameActors.add(runner);
-        gameActors.add(ground);
-        gameActors.add(milk);
-        gameActors.add(ventilation);
-        gameActors.add(trumpet);
 
         Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void act(float delta) {
+        generateNewActors();
         for (GameActor actor : gameActors) {
             if (!actor._static) {
                 actor.setSpeed(actor.getSpeed().add(new Vector(0, -0.1f)));
@@ -77,14 +76,25 @@ public class GameStage extends Stage {
         super.act(delta);
     }
 
+    public void generateNewActors() {
+        GameActor ground = generator.generateGround();
+
+        if (ground != null) {
+            addActor(ground);
+            gameActors.add(ground);
+
+            ArrayList<GameActor> obstacles = generator.generateOstacles(ground);
+            for (GameActor obstacle : obstacles) {
+                addActor(obstacle);
+                runner.setZIndex(obstacle.getZIndex() + 1);
+            }
+            gameActors.addAll(obstacles);
+        }
+    }
+
     public void onCollision(Collision collision) {
         if (collision.getActorA() instanceof Runner) {
             Runner runner = (Runner) collision.getActorA();
-
-            if (collision.getActorB() instanceof Ground) {
-                runner.land();
-                return;
-            }
 
             if (collision.getActorB() instanceof Food) {
                 System.out.println("I EAT FOODDDD!!!1");
@@ -94,7 +104,6 @@ public class GameStage extends Stage {
             }
 
         }
-
 
         if (collision.getActorA() instanceof Food) {
             Food food = (Food) collision.getActorA();
@@ -111,13 +120,17 @@ public class GameStage extends Stage {
 
         GameActor actor = collision.getActorA();
         if (collision.getActorB() instanceof Ground) {
-            actor.land();
+            if (Math.abs(actor.getBox().getPosition()._y - 1) < 1e-2)
+                actor.land();
             return;
         }
+
         if (collision.getActorB() instanceof Obstacle) {
             Obstacle obstacle = (Obstacle) collision.getActorB();
             if (actor.getBox().getPosition()._y > obstacle.getBox().getPosition()._y + obstacle.getBox().getSize()._y) {
-                actor.land();
+                if (actor.getSpeed()._y <= 0) {
+                    actor.land();
+                }
                 return;
             }
         }

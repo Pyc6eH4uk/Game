@@ -35,4 +35,12 @@ public class Runner extends AnimatedActor {
 
         jumpingAnimation = new Animation(0.1f, jumpingFrames);
     }
+
+    @Override
+    protected void land() {
+        super.land();
+
+        _speed.setX(1);
+        _speed.setY(0);
+    }
 }

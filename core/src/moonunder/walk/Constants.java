@@ -20,6 +20,8 @@ public class Constants {
     public static String BROWN_CAT_ATLAS_PATH = "brown_cat_spritesheet.txt";
     public static String RACCOON_ATLAS_PATH = "raccoon_spritesheet.txt";
 
+    public static final String BACKGROUND_IMAGE_PATH = "images/cityBkg.png";
+
     public static String[] GRAY_CAT_RUNNING_REGION_NAMES = new String[] {
             "gray_cat_running1",
             "gray_cat_running2",
