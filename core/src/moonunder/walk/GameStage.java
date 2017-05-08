@@ -1,12 +1,6 @@
 package moonunder.walk;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.ArrayList;
@@ -25,24 +19,26 @@ public class GameStage extends Stage {
     protected Background background;
 
     public GameStage() {
-
-        background = new Background(new Box(new Vector(0, 0), new Vector(GameActor.transformFromScreen(getWidth()), GameActor.transformFromScreen(getHeight()))), new Vector(0.5f, 0));
+        background = new Background(getCamera());
 
         gameActors = new ArrayList<GameActor>();
         movementManager = new GameActorMovementManager();
         generator = new Generator(getCamera());
         runner = new Runner(new Vector(0, 3));
+        Milk milk = new Milk(new Vector(2, 4));
 
+        addActor(milk);
         addActor(background);
         addActor(runner);
         gameActors.add(runner);
-
+        gameActors.add(milk);
         Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void act(float delta) {
         generateNewActors();
+//        System.out.println("Runner position" + runner.getBox().getPosition()._x);
         for (GameActor actor : gameActors) {
             if (!actor._static) {
                 actor.setSpeed(actor.getSpeed().add(new Vector(0, -0.1f)));
@@ -78,12 +74,18 @@ public class GameStage extends Stage {
 
     public void generateNewActors() {
         GameActor ground = generator.generateGround();
+        GameActor food = generator.generateNewFood();
+
+        if (food != null) {
+            addActor(food);
+            gameActors.add(food);
+        }
 
         if (ground != null) {
             addActor(ground);
             gameActors.add(ground);
 
-            ArrayList<GameActor> obstacles = generator.generateOstacles(ground);
+            ArrayList<GameActor> obstacles = generator.generateObstacles(ground);
             for (GameActor obstacle : obstacles) {
                 addActor(obstacle);
                 runner.setZIndex(obstacle.getZIndex() + 1);
@@ -97,7 +99,6 @@ public class GameStage extends Stage {
             Runner runner = (Runner) collision.getActorA();
 
             if (collision.getActorB() instanceof Food) {
-                System.out.println("I EAT FOODDDD!!!1");
                 gameActors.remove(collision.getActorB());
                 collision.getActorB().remove();
                 return;
@@ -111,7 +112,6 @@ public class GameStage extends Stage {
             if (collision.getActorB() instanceof Runner) {
                 Runner runner = (Runner) collision.getActorB();
 
-                System.out.println("I EAT FOODDDD!!!2");
                 gameActors.remove(food);
                 food.remove();
                 return;
@@ -138,10 +138,7 @@ public class GameStage extends Stage {
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-        System.out.println("onTouchDown");
-
         runner.jump();
-
         return super.touchDown(x, y, pointer, button);
     }
 }

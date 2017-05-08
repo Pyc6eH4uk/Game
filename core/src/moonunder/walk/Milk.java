@@ -12,6 +12,6 @@ public class Milk extends Food {
         super(position);
 
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("food/products.txt"));
-        sprite = textureAtlas.createSprite("2");
+        this.sprite = textureAtlas.createSprite("2");
     }
 }

@@ -12,6 +12,6 @@ public class Meat extends Food {
         super(position);
 
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("food/products.txt"));
-        sprite = textureAtlas.createSprite("1");
+        this.sprite = textureAtlas.createSprite("1");
     }
 }
