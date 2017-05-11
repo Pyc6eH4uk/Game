@@ -1,0 +1,33 @@
+birdbottle_spritesheet.png
+size: 1600, 1142
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bird2
+  rotate: false
+  xy: 0, 0
+  size: 800, 571
+  orig: 800, 571
+  offset: 0, 0
+  index: -1
+bird3
+  rotate: false
+  xy: 800, 0
+  size: 800, 571
+  orig: 800, 571
+  offset: 0, 0
+  index: -1
+bottle
+  rotate: false
+  xy: 0, 571
+  size: 331, 344
+  orig: 331, 344
+  offset: 0, 0
+  index: -1
+brid1
+  rotate: false
+  xy: 331, 571
+  size: 800, 571
+  orig: 800, 571
+  offset: 0, 0
+  index: -1
