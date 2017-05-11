@@ -15,13 +15,23 @@ public class GameActor extends Actor {
     protected boolean _static;
     protected boolean _jumping;
     protected boolean _passable;
+    protected boolean _wasTouch;
 
     public GameActor(Box box, Vector speed) {
         _box = box;
         _speed = speed;
+        _wasTouch = false;
         _static = false;
         _passable = false;
         this.sprite = null;
+    }
+
+    public boolean isWasTouch() {
+        return _wasTouch;
+    }
+
+    public void setWasTouch(boolean _wasTouch) {
+        this._wasTouch = _wasTouch;
     }
 
     public Box getBox() {
@@ -65,9 +75,12 @@ public class GameActor extends Actor {
     }
 
     protected void jump() {
+        if (_jumping) {
+            return;
+        }
         _jumping = true;
-        _speed.setX(2);
-        _speed.setY(4);
+        _speed.setX(2.5f);
+        _speed.setY(3.5f);
     }
 }
 

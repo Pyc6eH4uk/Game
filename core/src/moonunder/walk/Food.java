@@ -5,7 +5,9 @@ package moonunder.walk;
  */
 
 public class Food extends GameActor {
+
     public Food(Vector position) {
         super(new Box(position, new Vector(Constants.FOOD_WIDTH, Constants.FOOD_HEIGHT)), new Vector(0, 0));
     }
+
 }

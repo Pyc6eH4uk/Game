@@ -48,6 +48,24 @@ public class GameActorMovementManager {
             for (GameActor actor : actors) {
                 if (actor == movingActor) continue;
 
+//                if (movingActor._wasTouch || actor._wasTouch) continue;
+
+                if (movingActor._wasTouch && !(actor instanceof Ground)) continue;
+
+                if (actor._wasTouch) continue;
+
+                if (movingActor instanceof Raccoon) {
+                    if (!(actor instanceof Ground)) {
+                        continue;
+                    }
+                }
+                if (movingActor instanceof Bird) {
+                    continue;
+                }
+                if (!(movingActor instanceof Runner) && actor instanceof Bird) {
+                    continue;
+                }
+
                 if (actor._passable) {
                     if (movingActor.getBox().getPosition()._y >= actor.getBox().getPosition()._y + actor.getBox().getSize()._y) {
                         if (Box.overlaps(afterMoveX, actor.getBox())) {
@@ -83,6 +101,25 @@ public class GameActorMovementManager {
         boolean wasCollide = false;
         for (GameActor actor : actors) {
             if (actor == movingActor) continue;
+
+//            if (movingActor._wasTouch || actor._wasTouch) continue;
+
+            if (movingActor._wasTouch && !(actor instanceof Ground)) continue;
+
+            if (actor._wasTouch) continue;
+
+            if (movingActor instanceof Raccoon) {
+                if (!(actor instanceof Ground)) {
+                    continue;
+                }
+            }
+            if (movingActor instanceof Bird) {
+                continue;
+            }
+
+            if (!(movingActor instanceof Runner) && actor instanceof Bird) {
+                continue;
+            }
 
             if (actor._passable) {
                 if (movingActor.getBox().getPosition()._y >= actor.getBox().getPosition()._y + actor.getBox().getSize()._y) {

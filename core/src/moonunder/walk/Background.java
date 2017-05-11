@@ -18,15 +18,15 @@ public class Background extends GameActor {
     private Camera camera;
 
     public Background(Camera camera) {
-        super(new Box(new Vector(0, 0), new Vector(Constants.APP_WIDTH, Constants.APP_HEIGHT)), new Vector(0, 0));
+        super(new Box(new Vector(0, 0), new Vector(Gdx.graphics.getWidth(), Gdx.graphics.getHeight())), new Vector(0, 0));
 
         texture = new Texture(Gdx.files.internal(Constants.BACKGROUND_IMAGE_PATH));
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.BACKGROUND_IMAGE_PATH)));
         this.camera = camera;
 
         this.sprite = new Sprite(texture);
-        leftBounds = new Box(new Vector(0, 0), new Vector(Constants.APP_WIDTH, Constants.APP_HEIGHT));
-        rightBounds = new Box(new Vector(Constants.APP_WIDTH, 0), new Vector(Constants.APP_WIDTH, Constants.APP_HEIGHT));
+        leftBounds = new Box(new Vector(0, 0), new Vector(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        rightBounds = new Box(new Vector(Gdx.graphics.getWidth(), 0), new Vector(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
     }
 
     @Override
@@ -41,10 +41,10 @@ public class Background extends GameActor {
         super.draw(batch, parentAlpha);
 
         batch.draw(textureRegion, leftBounds.getPosition()._x, leftBounds.getPosition()._y,
-                            Constants.APP_WIDTH, Constants.APP_HEIGHT);
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         batch.draw(textureRegion, rightBounds.getPosition()._x, rightBounds.getPosition()._y,
-                            Constants.APP_WIDTH, Constants.APP_HEIGHT);
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     private boolean leftBoundsReached(float delta) {
@@ -52,7 +52,7 @@ public class Background extends GameActor {
     }
 
     private void resetBounds() {
-        leftBounds = new Box(new Vector(camera.position.x - camera.viewportWidth / 2f, 0), new Vector(Constants.APP_WIDTH, Constants.APP_HEIGHT));
-        rightBounds = new Box(new Vector(camera.position.x + Constants.APP_WIDTH - camera.viewportWidth / 2f, 0), new Vector(Constants.APP_WIDTH, Constants.APP_HEIGHT));
+        leftBounds = new Box(new Vector(camera.position.x - camera.viewportWidth / 2f, 0), new Vector(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        rightBounds = new Box(new Vector(camera.position.x + Gdx.graphics.getWidth() - camera.viewportWidth / 2f, 0), new Vector(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
     }
 }
