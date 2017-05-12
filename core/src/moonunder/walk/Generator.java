@@ -84,10 +84,9 @@ public class Generator {
         return obstacles;
     }
 
-
     public float generateFoodPosition() {
         if (lastGeneratedFood == null)
-            return 5f;
+            return GameActor.transformFromScreen(camera.position.x + camera.viewportWidth);
         return lastGeneratedFood.getBox().getPosition()._x + (float) Math.random() * 6 + Constants.FOOD_WIDTH * 2;
     }
 
@@ -114,7 +113,7 @@ public class Generator {
 
     public float generateEnemyPosition() {
         if (lastGeneratedEnemy == null)
-            return 6f;
+            return GameActor.transformFromScreen(camera.position.x + camera.viewportWidth);
         return lastGeneratedEnemy.getBox().getPosition()._x + (float) Math.random() * 8 + Constants.ENEMY_WIDTH * 4;
     }
 
@@ -126,12 +125,12 @@ public class Generator {
 
         double probability = Math.random();
 
-        if (probability < 0.2) {
+        if (probability < 0.32) {
             float attackPosition = 2 * GameActor.transformFromScreen(camera.viewportWidth) / 3;
             attackPosition = (float) Math.random() * attackPosition;
             Vector position = new Vector(generateEnemyPosition(), 5);
             actor = new Bird(position, position.getX() - attackPosition);
-        } else {
+        } else  {
             actor = new Raccoon(new Vector(generateEnemyPosition(), 10.0f));
         }
 

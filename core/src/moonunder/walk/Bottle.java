@@ -1,6 +1,9 @@
 package moonunder.walk;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
@@ -8,11 +11,20 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 
 public class Bottle extends Enemy {
+    private Sprite sprite;
     public Bottle(Vector position) {
         super(position);
-
         TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("enemy/enemy_spritesheet.txt"));
-        this.sprite = textureAtlas.createSprite("bottle");
+        sprite = textureAtlas.createSprite("bottle");
+        this._speed = new Vector(0, 0);
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(sprite,
+                transformToScreen(_box.getPosition()._x),
+                transformToScreen(_box.getPosition()._y),
+                transformToScreen(_box.getSize()._x),
+                transformToScreen(_box.getSize()._y));
+    }
 }

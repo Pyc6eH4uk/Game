@@ -2,8 +2,9 @@ package moonunder.walk;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import java.util.ArrayList;
+import gameScreens.StartGame;
 
 /**
  * Created by pyc6eh4uk on 07.05.17.
@@ -13,13 +14,16 @@ public class GameStage extends Stage {
     protected static final float CAMERA_SPEED = GameActor.transformToScreen(1.0f);
     protected GameActorMovementManager movementManager;
     protected Generator generator;
-
+    public int score = 0;
     protected Runner runner;
     protected ArrayList<GameActor> gameActors;
     protected Background background;
+    private ImageButton pauseBtn;
+    private StartGame game;
+    public int lifeCount = 3;
 
-    public GameStage() {
-
+    public GameStage(StartGame game) {
+        this.game = game;
         background = new Background(getCamera());
 
         gameActors = new ArrayList<GameActor>();
@@ -36,6 +40,28 @@ public class GameStage extends Stage {
     @Override
     public void act(float delta) {
         generateNewActors();
+        ArrayList<GameActor> deleteActors = new ArrayList<GameActor>();
+        for (GameActor actor : gameActors) {
+            if (actor instanceof  Runner) {
+                if (actor.getBox().getPosition()._y + actor.getBox().getSize()._y < 0) {
+                    lifeCount--;
+                    runner.setBox(new Box(new Vector(GameActor.transformFromScreen(getCamera().position.x - getCamera().viewportWidth / 2.0f), 10), runner.getBox().getSize()));
+                }
+            }
+            if (actor instanceof  Runner) continue;
+            if (actor.getBox().getPosition()._x + actor.getBox().getSize()._x < GameActor.transformFromScreen(getCamera().position.x - getCamera().viewportWidth / 2)) {
+                deleteActors.add(actor);
+            }
+            if (actor.getBox().getPosition()._y + actor.getBox().getSize()._y < 0) {
+                deleteActors.add(actor);
+            }
+        }
+
+        for (GameActor toDeleteActors : deleteActors) {
+            gameActors.remove(toDeleteActors);
+            toDeleteActors.remove();
+        }
+
         for (GameActor actor : gameActors) {
             if (actor instanceof Bird) {
                 Bird bird = (Bird) actor;
@@ -124,6 +150,8 @@ public class GameStage extends Stage {
             Runner runner = (Runner) collision.getActorA();
 
             if (collision.getActorB() instanceof Food) {
+                if (collision.getActorB() instanceof Milk) score++;
+                if (collision.getActorB() instanceof Meat) score+= 2;
                 gameActors.remove(collision.getActorB());
                 collision.getActorB().remove();
                 collision.getActorB()._wasTouch = true;
@@ -131,7 +159,7 @@ public class GameStage extends Stage {
             }
 
             if (collision.getActorB() instanceof Enemy) {
-                System.out.println("Uebalsya");
+                lifeCount--;
                 collision.getActorB()._wasTouch = true;
                 return;
             }
@@ -154,7 +182,6 @@ public class GameStage extends Stage {
         if (collision.getActorA() instanceof Enemy) {
             Enemy enemy = (Enemy) collision.getActorA();
             if (collision.getActorB() instanceof Runner) {
-                System.out.println("Uebalsya");
                 collision.getActorA()._wasTouch = true;
                 return;
             }

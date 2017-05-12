@@ -1,9 +1,6 @@
 package moonunder.walk;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.TreeSet;
-
 
 /**
  * Created by gdhsnlvr on 06.05.17.
@@ -47,8 +44,6 @@ public class GameActorMovementManager {
 
             for (GameActor actor : actors) {
                 if (actor == movingActor) continue;
-
-//                if (movingActor._wasTouch || actor._wasTouch) continue;
 
                 if (movingActor._wasTouch && !(actor instanceof Ground)) continue;
 
@@ -101,8 +96,6 @@ public class GameActorMovementManager {
         boolean wasCollide = false;
         for (GameActor actor : actors) {
             if (actor == movingActor) continue;
-
-//            if (movingActor._wasTouch || actor._wasTouch) continue;
 
             if (movingActor._wasTouch && !(actor instanceof Ground)) continue;
 

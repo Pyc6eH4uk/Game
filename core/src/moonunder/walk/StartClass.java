@@ -10,7 +10,7 @@ public class StartClass extends ApplicationAdapter {
 	private GameStage gameStage;
 	@Override
 	public void create () {
-		gameStage = new GameStage();
+//		gameStage = new GameStage();
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class StartClass extends ApplicationAdapter {
 		gameStage.act(Gdx.graphics.getDeltaTime());
 		gameStage.draw();
 	}
-	
+
 	@Override
 	public void dispose () {
 

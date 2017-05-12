@@ -1,5 +1,6 @@
 package moonunder.walk;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -8,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * Created by gdhsnlvr on 06.05.17.
  */
 public class GameActor extends Actor {
-    public static final float WORLD_TO_SCREEN = 64;
+    public static final float WORLD_TO_SCREEN = Gdx.graphics.getHeight() / 8;
     protected Box _box;
     protected Vector _speed;
     protected Sprite sprite;
@@ -61,7 +62,6 @@ public class GameActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-
         batch.draw(sprite,
                 transformToScreen(_box.getPosition()._x),
                 transformToScreen(_box.getPosition()._y),
@@ -80,7 +80,7 @@ public class GameActor extends Actor {
         }
         _jumping = true;
         _speed.setX(2.5f);
-        _speed.setY(3.5f);
+        _speed.setY(4.5f);
     }
 }
 
