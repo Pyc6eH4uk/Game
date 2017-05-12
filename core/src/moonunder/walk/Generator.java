@@ -60,7 +60,7 @@ public class Generator {
         for (int i = 0; i < count; i++) {
             float position = lastPosition + MINIMAL_SPACE * 1.5f + (float) Math.random() * MAXIMAL_SPACE_WITHOUT_MINIMAL;
             if (position + MINIMAL_SPACE * 1.5f < getRightPosition(ground)) {
-                obstacles.add(new Ventilation(new Vector(position, ground.getBox().getSize()._y), new Vector(MINIMAL_SPACE * 1.5f, MINIMAL_SPACE)));
+                obstacles.add(new Ventilation(new Vector(position, ground.getBox().getSize()._y), new Vector(MINIMAL_SPACE * 1.5f, MINIMAL_SPACE / 1.2f)));
                 lastPosition = position;
             }
         }

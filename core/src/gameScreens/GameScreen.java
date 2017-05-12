@@ -37,7 +37,6 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private Sprite life;
     private String score;
-//    final float scale = stage.getHeight() / 6.0f / new Texture("life/heart.png").getHeight();
     final float scale;
 
     public GameScreen(StartGame game, MainMenuScreen menuScreen) {
@@ -50,6 +49,7 @@ public class GameScreen implements Screen {
         result = "";
         score = "Score: ";
         life = new Sprite(new Texture(Gdx.files.internal("life/heart.png")));
+        font.getData().setScale(scale / 2f);
         pauseListener();
     }
 
@@ -57,13 +57,13 @@ public class GameScreen implements Screen {
     private void pauseListener() {
         final TextureRegion texture = new TextureRegion(new Texture("buttons/pauseBtn.png"));
         final Camera camera = gameStage.getCamera();
-        final float scale = gameStage.getHeight() / 6.0f / new Texture("buttons/pauseBtn.png").getHeight();
+        final float scaleBtn = gameStage.getHeight() / 6.0f / new Texture("buttons/pauseBtn.png").getHeight();
         pauseBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("buttons/pauseBtn.png")))) {
             @Override
             public void draw(Batch batch, float parentAlpha) {
-                setPosition(camera.position.x + camera.viewportWidth / 2 - pauseBtn.getWidth() * scale, gameStage.getHeight() - pauseBtn.getHeight() * scale);
-                batch.draw(texture, camera.position.x + camera.viewportWidth / 2 - pauseBtn.getWidth() * scale, gameStage.getHeight() - pauseBtn.getHeight() * scale,
-                        pauseBtn.getWidth() * scale, pauseBtn.getHeight() * scale);
+                setPosition(camera.position.x + camera.viewportWidth / 2 - pauseBtn.getWidth() * scaleBtn / 1.5f, gameStage.getHeight() - pauseBtn.getHeight() * scaleBtn / 1.5f);
+                batch.draw(texture, camera.position.x + camera.viewportWidth / 2 - pauseBtn.getWidth() * scaleBtn / 1.5f, gameStage.getHeight() - pauseBtn.getHeight() * scaleBtn / 1.5f ,
+                        pauseBtn.getWidth() * scaleBtn / 1.5f, pauseBtn.getHeight() * scaleBtn / 1.5f);
             }
         };
 
@@ -96,13 +96,13 @@ public class GameScreen implements Screen {
         for (int i = 0; i < gameStage.lifeCount; i++) {
             batch.begin();
 //            life.setScale(scale);
-            batch.draw(life, gameStage.getWidth() / 1.5f + i * life.getWidth() * 1.1f, gameStage.getHeight() - life.getHeight(), life.getWidth() * scale, life.getHeight() * scale);
+            batch.draw(life, gameStage.getWidth() / 1.5f + i * life.getWidth() * 1.1f * scale / 2, gameStage.getHeight() - life.getHeight() * scale / 2, life.getWidth() * scale / 2, life.getHeight() * scale / 2);
 //            life.setScale(scale);
             batch.end();
         }
         batch.begin();
         font.setColor(1, 1, 1, 1);
-        font.draw(batch, score + result, gameStage.getWidth() / 2, gameStage.getHeight() - font.getLineHeight());
+        font.draw(batch, score + result, gameStage.getWidth() / 2, gameStage.getHeight() - font.getLineHeight() + scale * 1.5f);
         batch.end();
     }
 

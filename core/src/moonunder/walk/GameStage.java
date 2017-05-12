@@ -102,7 +102,7 @@ public class GameStage extends Stage {
             if (!collides)
                 runner.setBox(runner.getBox().move(new Vector(w, 0)));
             else if (w > runner.getBox().getSize()._x) {
-                System.out.println("JOPA");
+                lifeCount--;
                 runner.setBox(runner.getBox().move(new Vector(w, 10)));
             }
         }
