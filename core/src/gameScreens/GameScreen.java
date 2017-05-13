@@ -38,9 +38,10 @@ public class GameScreen implements Screen {
     private Sprite life;
     private String score;
     final float scale;
-
+    private ScoreScreen scoreScreen;
     public GameScreen(StartGame game, MainMenuScreen menuScreen) {
         this.game = game;
+        scoreScreen = new ScoreScreen(game);
         batch = new SpriteBatch();
         gameStage = new GameStage(game);
         font = new BitmapFont();
@@ -85,19 +86,18 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         if (gameStage.lifeCount == 0) {
-            game.setScreen(new MainMenuScreen(game));
+            scoreScreen.writeInFile(result);
+//            game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new ScoreScreen(game));
             return;
         }
         result = Integer.toString(gameStage.score);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameStage.draw();
         gameStage.act(Gdx.graphics.getDeltaTime());
-        System.out.println(gameStage.lifeCount);
         for (int i = 0; i < gameStage.lifeCount; i++) {
             batch.begin();
-//            life.setScale(scale);
             batch.draw(life, gameStage.getWidth() / 1.5f + i * life.getWidth() * 1.1f * scale / 2, gameStage.getHeight() - life.getHeight() * scale / 2, life.getWidth() * scale / 2, life.getHeight() * scale / 2);
-//            life.setScale(scale);
             batch.end();
         }
         batch.begin();

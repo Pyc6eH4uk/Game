@@ -39,7 +39,7 @@ public class Runner extends AnimatedActor {
     @Override
     protected void land() {
         super.land();
-        _speed.setX(-0.5f);
+        _speed.setX(-0.25f);
         _speed.setY(0);
     }
 }

@@ -30,12 +30,12 @@ public class Constants {
 
     public static final String BACKGROUND_IMAGE_PATH = "images/cityBkg.png";
 
-    public static String[] GRAY_CAT_RUNNING_REGION_NAMES = new String[] {
+    public  String[] GRAY_CAT_RUNNING_REGION_NAMES = new String[] {
             "gray_cat_running1",
             "gray_cat_running2",
             "gray_cat_running3"
     };
-    public static  String[] GRAY_CAT_JUMPING_REGION_NAMES = new String[] {
+    public  String[] GRAY_CAT_JUMPING_REGION_NAMES = new String[] {
             "gray_cat_jumping1",
             "gray_cat_jumping2",
             "gray_cat_jumping3"

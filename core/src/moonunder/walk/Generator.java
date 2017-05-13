@@ -99,10 +99,12 @@ public class Generator {
 
         double probability = Math.random();
 
-        if (probability < 0.4) {
-            actor = new Milk(new Vector(generateFoodPosition(), 10.0f));
-        } else {
+        if (probability < 0.1) {
+            actor = new Fishcans(new Vector(generateFoodPosition(), 10.0f));
+        } else if (probability < 0.35) {
             actor = new Meat(new Vector(generateFoodPosition(), 10.0f));
+        } else {
+            actor = new Milk(new Vector(generateFoodPosition(), 10.0f));
         }
 
         lastGeneratedFood = actor;

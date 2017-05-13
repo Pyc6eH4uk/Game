@@ -65,9 +65,6 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-
-
-
         helpBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("buttons/helpBtn.png")))) {
             @Override
             public void draw(Batch batch, float parentAlpha) {
@@ -97,7 +94,7 @@ public class MainMenuScreen implements Screen {
         scoreBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float x, float y) {
-                System.out.println("Score");
+                game.setScreen(new ScoreScreen(game));
             }
         });
 

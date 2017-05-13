@@ -91,7 +91,7 @@ public class GameStage extends Stage {
         }
 
         float cameraX = GameActor.transformFromScreen(getCamera().position.x - getWidth() / 2);
-        float w = cameraX - runner.getBox().getPosition()._x;
+        float w = cameraX - runner.getBox().getPosition()._x + runner.getBox().getSize()._x / 2;
         if (w > 0) {
             boolean collides = false;
             for (GameActor actor : gameActors) {
@@ -101,7 +101,7 @@ public class GameStage extends Stage {
             }
             if (!collides)
                 runner.setBox(runner.getBox().move(new Vector(w, 0)));
-            else if (w > runner.getBox().getSize()._x) {
+            else if (w > runner.getBox().getSize()._x * 1.5f) {
                 lifeCount--;
                 runner.setBox(runner.getBox().move(new Vector(w, 10)));
             }
@@ -119,11 +119,6 @@ public class GameStage extends Stage {
         GameActor food = generator.generateNewFood();
         GameActor enemy = generator.generateEnemies();
 
-        if (food != null) {
-            addActor(food);
-            gameActors.add(food);
-        }
-
         if (ground != null) {
             addActor(ground);
             gameActors.add(ground);
@@ -134,6 +129,11 @@ public class GameStage extends Stage {
                 runner.setZIndex(obstacle.getZIndex() + 1);
             }
             gameActors.addAll(obstacles);
+        }
+
+        if (food != null) {
+            addActor(food);
+            gameActors.add(food);
         }
 
         if (enemy != null) {
@@ -150,8 +150,10 @@ public class GameStage extends Stage {
             Runner runner = (Runner) collision.getActorA();
 
             if (collision.getActorB() instanceof Food) {
-                if (collision.getActorB() instanceof Milk) score++;
-                if (collision.getActorB() instanceof Meat) score+= 2;
+                if (collision.getActorB() instanceof Milk) score+=3;
+                if (collision.getActorB() instanceof Meat) score+= 5;
+                if (collision.getActorB() instanceof Fishcans) score+= 7;
+
                 gameActors.remove(collision.getActorB());
                 collision.getActorB().remove();
                 collision.getActorB()._wasTouch = true;
