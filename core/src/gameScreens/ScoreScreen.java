@@ -56,9 +56,9 @@ public class ScoreScreen implements Screen {
     }
 
     private void goToBackMenu() {
-        final TextureRegion backTexture = new TextureRegion(new Texture("buttons/newBackBtn.jpg"));
-        final float scale = stage.getHeight() / 6.0f / new Texture("buttons/newBackBtn.jpg").getHeight();
-        backBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("buttons/newBackBtn.jpg"))))) {
+        final TextureRegion backTexture = new TextureRegion(new Texture("buttons/back.png"));
+        final float scale = stage.getHeight() / 6.0f / new Texture("buttons/back.png").getHeight();
+        backBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("buttons/back.png"))))) {
             @Override
             public void draw(Batch batch, float parentAlpha) {
                 setPosition(stage.getWidth() - backBtn.getWidth() * scale / 1.5f, stage.getHeight() - backBtn.getHeight() * scale / 1.5f);
@@ -108,7 +108,7 @@ public class ScoreScreen implements Screen {
         font.draw(batch, text, stage.getWidth() / 2 - font.getLineHeight() , stage.getHeight() - font.getLineHeight() + speialScale * 1.5f);
         batch.end();
 
-        System.out.print(preferencesString);
+//        System.out.print(preferencesString);
 
 
         stage.act();

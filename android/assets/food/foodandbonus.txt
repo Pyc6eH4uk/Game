@@ -1,0 +1,40 @@
+foodandbonus.png
+size: 360, 1389
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+doublepoints
+  rotate: false
+  xy: 0, 0
+  size: 326, 315
+  orig: 326, 315
+  offset: 0, 0
+  index: -1
+fishcans
+  rotate: false
+  xy: 0, 315
+  size: 301, 347
+  orig: 301, 347
+  offset: 0, 0
+  index: -1
+meat
+  rotate: false
+  xy: 0, 662
+  size: 345, 208
+  orig: 345, 208
+  offset: 0, 0
+  index: -1
+milk
+  rotate: false
+  xy: 0, 870
+  size: 207, 234
+  orig: 207, 234
+  offset: 0, 0
+  index: -1
+shield
+  rotate: false
+  xy: 0, 1104
+  size: 360, 285
+  orig: 360, 285
+  offset: 0, 0
+  index: -1
