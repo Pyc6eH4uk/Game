@@ -107,8 +107,8 @@ public class GameStage extends Stage {
             }
         }
 
-        if (runner.getBox().getPosition().getX() + runner.getBox().getSize()._x > GameActor.transformFromScreen(getCamera().position.x + getCamera().viewportWidth / 4)) {
-            runner.getBox().getPosition()._x = GameActor.transformFromScreen(getCamera().position.x  + getCamera().viewportWidth / 4) - 1e-2f - runner.getBox().getSize()._x;
+        if (runner.getBox().getPosition().getX() + runner.getBox().getSize()._x > GameActor.transformFromScreen(getCamera().position.x + getCamera().viewportWidth / 2.5f)) {
+            runner.getBox().getPosition()._x = GameActor.transformFromScreen(getCamera().position.x  + getCamera().viewportWidth / 2.5f) - 1e-2f - runner.getBox().getSize()._x;
         }
 
         super.act(delta);
@@ -161,7 +161,7 @@ public class GameStage extends Stage {
             }
 
             if (collision.getActorB() instanceof Enemy) {
-                lifeCount--;
+                //  lifeCount--;
                 collision.getActorB()._wasTouch = true;
                 return;
             }

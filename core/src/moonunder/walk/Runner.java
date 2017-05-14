@@ -41,5 +41,6 @@ public class Runner extends AnimatedActor {
         super.land();
         _speed.setX(-0.25f);
         _speed.setY(0);
+        //runningAnimation = new Animation(0.1f, runningAnimation);
     }
 }

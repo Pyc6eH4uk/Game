@@ -82,12 +82,12 @@ public class ShopScreen implements Screen {
         backBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("buttons/back.png"))))) {
             @Override
             public void draw(Batch batch, float parentAlpha) {
-                setPosition(stage.getWidth() - backBtn.getWidth() * scale / 1.5f, stage.getHeight() - backBtn.getHeight() * scale / 1.5f);
-                batch.draw(backTexture, stage.getWidth() - backBtn.getWidth() * scale / 1.5f, stage.getHeight() - backBtn.getHeight() * scale / 1.5f ,
-                        backBtn.getWidth() * scale / 1.5f, backBtn.getHeight() * scale / 1.5f);
-//                setPosition( scale / 1.5f,  scale / 1.5f);
-//                batch.draw(backTexture, scale / 1.5f,  scale / 1.5f ,
+//                setPosition(stage.getWidth() - backBtn.getWidth() * scale / 1.5f, stage.getHeight() - backBtn.getHeight() * scale / 1.5f);
+//                batch.draw(backTexture, stage.getWidth() - backBtn.getWidth() * scale / 1.5f, stage.getHeight() - backBtn.getHeight() * scale / 1.5f ,
 //                        backBtn.getWidth() * scale / 1.5f, backBtn.getHeight() * scale / 1.5f);
+                setPosition( scale / 1.5f,  scale / 1.5f);
+                batch.draw(backTexture, scale / 1.5f,  scale / 1.5f ,
+                        backBtn.getWidth() * scale / 1.5f, backBtn.getHeight() * scale / 1.5f);
             }
         };
         backBtn.addListener(new ClickListener() {
@@ -121,9 +121,9 @@ public class ShopScreen implements Screen {
                 dialog.setPosition(50, 50);
                 dialog.show(stage);
                 Constants.BROWN_CAT_ATLAS_PATH = "other/gray_cat_spritesheet.txt";
-                Constants.BROWN_CAT_RUNNING_REGION_NAMES = new String[] {"gray_cat_running1", "gray_cat_running2", "gray_cat_running3"};
+                Constants.BROWN_CAT_RUNNING_REGION_NAMES = new String[] {"gray_cat_running1", "gray_cat_running2"};
                 Constants.BROWN_CAT_JUMPING_REGION_NAMES = new String[] {"gray_cat_jumping1",
-                        "gray_cat_jumping2", "gray_cat_jumping3"
+                        "gray_cat_jumping2"
                 };
 //                Constants.GRAY_CAT_HIT_REGION_NAME = "brown_cat";
                 Timer.schedule(new Timer.Task() {
@@ -148,14 +148,38 @@ public class ShopScreen implements Screen {
                         secondCatButton.getWidth() * scaleBtn / 1.5f, secondCatButton.getHeight() * scaleBtn / 1.5f);
             }
         };
-        final TextureRegion cat3Texture = new TextureRegion(new Texture("images/cat3.png"));
+        secondCatButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Choice cat");
+                dialog.text(label1);
+                dialog.setScale(scaleBtn);
+                dialog.setPosition(50, 50);
+                dialog.show(stage);
+                Constants.BROWN_CAT_ATLAS_PATH = "other/brown_cat_spritesheet.txt";
+                Constants.BROWN_CAT_RUNNING_REGION_NAMES = new String[] {"brown_cat_running1", "brown_cat_running2"};
+                Constants.BROWN_CAT_JUMPING_REGION_NAMES = new String[] {"brown_cat_jumping1",
+                        "brown_cat_jumping2"
+                };
+//                Constants.GRAY_CAT_HIT_REGION_NAME = "brown_cat";
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        dialog.hide();
+                        dialog.cancel();
+                        dialog.remove();
+                    }
+                }, 2);
+            }
+        });
+
+        //final TextureRegion cat3Texture = new TextureRegion(new Texture("images/cat3.png"));
         thirdCatButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("images/cat3.png")))) {
             @Override
             public void draw(Batch batch, float parentAlpha) {
                 setPosition(firstCatPosW + secondCatButton.getWidth() / 2 + scaleBtn / 1.5f + thirdCatButton.getWidth() / 2,stage.getHeight() / 1.5f - firstCatButton.getHeight() * scaleBtn / 2f);
 //                setPosition(firstCatPosW + thirdCatButton.getWidth() * 1 + scaleBtn, firstCatPosH + scaleBtn / 1.5f);
-                batch.draw(cat3Texture,firstCatPosW + secondCatButton.getWidth() / 2 + scaleBtn / 1.5f + thirdCatButton.getWidth() / 2,stage.getHeight() / 1.5f - firstCatButton.getHeight() * scaleBtn / 2f,
-                        thirdCatButton.getWidth() * scaleBtn / 1.5f, thirdCatButton.getHeight() * scaleBtn / 1.5f);
+                //batch.draw(cat3Texture,firstCatPosW + secondCatButton.getWidth() / 2 + scaleBtn / 1.5f + thirdCatButton.getWidth() / 2,stage.getHeight() / 1.5f - firstCatButton.getHeight() * scaleBtn / 2f,
+                  //      thirdCatButton.getWidth() * scaleBtn / 1.5f, thirdCatButton.getHeight() * scaleBtn / 1.5f);
             }
         };
         thirdCatButton.addListener(new ClickListener() {

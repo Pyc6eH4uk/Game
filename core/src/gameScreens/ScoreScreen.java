@@ -47,7 +47,7 @@ public class ScoreScreen implements Screen {
         createBackgroundForScore();
         preferences = Gdx.app.getPreferences("Scores");
         speialScale = stage.getHeight() / 6.0f / new Texture("life/heart.png").getHeight();
-        fileHandle = Gdx.files.local("records/records.txt");
+//        fileHandle = Gdx.files.local("records/records.txt");
         readFromFile();
         goToBackMenu();
         font.getData().setScale(speialScale / 1.3f);
@@ -81,13 +81,14 @@ public class ScoreScreen implements Screen {
 
     private void readFromFile() {
         preferencesString = preferences.getString("Score: ");
-        text = fileHandle.readString();
+//        text = fileHandle.readString();
     }
 
     public void writeInFile(String writingText) {
         preferences.putString("Score: ", "Score: " + writingText + " ");
+        preferencesString += preferences.putString("Score: ", "Score: " + writingText + " ");
         preferences.flush();
-        fileHandle.writeString("Score: " + writingText + " " + "\n", true);
+//        fileHandle.writeString("Score: " + writingText + " " + "\n", true);
     }
 
     @Override
@@ -105,8 +106,9 @@ public class ScoreScreen implements Screen {
         batch.end();
 
         batch.begin();
-        font.draw(batch, text, stage.getWidth() / 2 - font.getLineHeight() , stage.getHeight() - font.getLineHeight() + speialScale * 1.5f);
+        font.draw(batch, preferencesString, stage.getWidth() / 2 - font.getLineHeight() , stage.getHeight() - font.getLineHeight() + speialScale * 1.5f);
         batch.end();
+        System.out.println(preferencesString);
 
 //        System.out.print(preferencesString);
 

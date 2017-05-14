@@ -12,8 +12,8 @@ public class Constants {
     public static final float RUNNER_WIDTH = 1.68f;
     public static final float RUNNER_HEIGHT = 1.2f;
 
-    public static final float FOOD_WIDTH = 0.68f;
-    public static final float FOOD_HEIGHT = 0.7f;
+    public static final float FOOD_WIDTH = 0.9f;
+    public static final float FOOD_HEIGHT = 0.8f;
 
     public static final float ENEMY_WIDTH = 1.3f;
     public static final float ENEMY_HEIGHT = 1.0f;
@@ -24,7 +24,7 @@ public class Constants {
     public static float RUNNER_DENSITY = 0.5f;
 
     public static String GRAY_CAT_ATLAS_PATH = "gray_cat_spritesheet.txt";
-    public static String BROWN_CAT_ATLAS_PATH = "brown_cat_spritesheet.txt";
+    public static String BROWN_CAT_ATLAS_PATH = "other/gray_cat_spritesheet.txt";
     public static String RACCOON_ATLAS_PATH = "enemy/raccoon_spritesheet.txt";
     public static String FLYING_BIRD_PATH = "enemy/enemy_spritesheet.txt";
 
@@ -54,13 +54,13 @@ public class Constants {
     };
 
     public static String[] BROWN_CAT_RUNNING_REGION_NAMES = new String[] {
-            "brown_cat_running1",
-            "brown_cat_running2",
-            "brown_cat_running3"
+            "gray_cat_running1",
+            "gray_cat_running2",
+            "gray_cat_running3"
     };
     public static  String[] BROWN_CAT_JUMPING_REGION_NAMES = new String[] {
-            "brown_cat_jumping1",
-            "brown_cat_jumping2",
-            "brown_cat_jumping3"
+            "gray_cat_jumping1",
+            "gray_cat_jumping2",
+            "gray_cat_jumping3"
     };
 }
