@@ -33,24 +33,25 @@ public class ScoreScreen implements Screen {
     private Sprite sprite;
     private boolean exist;
     private ImageButton backBtn;
-    private float speialScale;
+    private float specialScale;
     private Preferences preferences;
     private String preferencesString;
-
+    private int maxScore;
     public ScoreScreen (StartGame game) {
         this.game = game;
         stage = new Stage();
         batch = new SpriteBatch();
         text = "";
+        maxScore = 0;
         font = new BitmapFont();
         preferencesString = "HER";
         createBackgroundForScore();
         preferences = Gdx.app.getPreferences("Scores");
-        speialScale = stage.getHeight() / 6.0f / new Texture("life/heart.png").getHeight();
+        specialScale = stage.getHeight() / 6.0f / new Texture("life/heart.png").getHeight();
 //        fileHandle = Gdx.files.local("records/records.txt");
         readFromFile();
         goToBackMenu();
-        font.getData().setScale(speialScale / 1.3f);
+        font.getData().setScale(specialScale / 1.3f);
         font.setColor(Color.GREEN);
         Gdx.input.setInputProcessor(stage);
     }
@@ -85,6 +86,8 @@ public class ScoreScreen implements Screen {
     }
 
     public void writeInFile(String writingText) {
+//        int intWritingText = preferences.getInteger("Score: ", Integer.valueOf(writingText));
+//        System.out.println("writing text" + " " + intWritingText);
         preferences.putString("Score: ", "Score: " + writingText + " ");
         preferencesString += preferences.putString("Score: ", "Score: " + writingText + " ");
         preferences.flush();
@@ -106,12 +109,9 @@ public class ScoreScreen implements Screen {
         batch.end();
 
         batch.begin();
-        font.draw(batch, preferencesString, stage.getWidth() / 2 - font.getLineHeight() , stage.getHeight() - font.getLineHeight() + speialScale * 1.5f);
+        font.draw(batch, preferencesString, stage.getWidth() / 2 - font.getLineHeight() , stage.getHeight() - font.getLineHeight() + specialScale * 1.5f);
         batch.end();
         System.out.println(preferencesString);
-
-//        System.out.print(preferencesString);
-
 
         stage.act();
         stage.draw();

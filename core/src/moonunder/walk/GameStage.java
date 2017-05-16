@@ -161,7 +161,7 @@ public class GameStage extends Stage {
             }
 
             if (collision.getActorB() instanceof Enemy) {
-                //  lifeCount--;
+                lifeCount--;
                 collision.getActorB()._wasTouch = true;
                 return;
             }

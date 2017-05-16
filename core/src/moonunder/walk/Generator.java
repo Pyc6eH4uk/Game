@@ -143,6 +143,7 @@ public class Generator {
 
 
     public ArrayList<GameActor> generateObstacles(GameActor ground) {
+
         ArrayList<GameActor> obstacles = new ArrayList<GameActor>();
         obstacles.addAll(generatePassableObstacles(ground));
         obstacles.addAll(generateImpassableObstacles(ground));
