@@ -85,12 +85,6 @@ public class AboutScreen implements Screen {
         sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sprite.draw(batch);
         batch.end();
-//
-//        batch.begin();
-//        font.draw(batch, string,
-//                stage.getWidth() / 2.3f - font.getLineHeight() * 2 - specialScale * 2.0f,
-//                stage.getHeight() / 1.5f + font.getLineHeight() + specialScale * 1.5f);
-//        batch.end();
 
         stage.act(delta);
         stage.draw();

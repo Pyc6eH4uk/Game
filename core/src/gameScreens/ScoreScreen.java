@@ -111,7 +111,6 @@ public class ScoreScreen implements Screen {
         batch.begin();
         font.draw(batch, preferencesString, stage.getWidth() / 2 - font.getLineHeight() , stage.getHeight() - font.getLineHeight() + specialScale * 1.5f);
         batch.end();
-        System.out.println(preferencesString);
 
         stage.act();
         stage.draw();

@@ -50,7 +50,7 @@ public class ShopScreen implements Screen {
         skin = new Skin(Gdx.files.internal("other/uiskin.json"));
         dialog = new Dialog("Chosen cat:", skin);
         dialog.setMovable(false);
-        secondDialog = new Dialog("Chosen cat", skin);
+        secondDialog = new Dialog("Chosen cat:", skin);
         secondDialog.setMovable(false);
         scaleBtn = stage.getHeight() / 1.5f / new Texture("images/cat1.png").getHeight();
 //        createBackButton();
@@ -108,9 +108,8 @@ public class ShopScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 dialog.text(label1);
                 dialog.setScale(scaleBtn * 4f);
-                System.out.println(dialog.getX() + " " + dialog.getY());
                 dialog.show(stage);
-                dialog.show(stage).setPosition(stage.getWidth() / 2 - label1.getWidth() / 2, stage.getHeight() - dialog.getHeight() * 1.1f);
+                dialog.show(stage).setPosition(Gdx.graphics.getWidth() / 2 - label1.getWidth() / 2, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 5.5f);
                 Constants.BROWN_CAT_ATLAS_PATH = "other/gray_cat_spritesheet.txt";
                 Constants.BROWN_CAT_RUNNING_REGION_NAMES = new String[] {"gray_cat_running1", "gray_cat_running2"};
                 Constants.BROWN_CAT_JUMPING_REGION_NAMES = new String[] {"gray_cat_jumping1",
@@ -143,7 +142,7 @@ public class ShopScreen implements Screen {
                 secondDialog.text(label2);
                 secondDialog.setScale(scaleBtn * 4f);
                 secondDialog.show(stage);
-                secondDialog.show(stage).setPosition(stage.getWidth() / 2 - label1.getWidth() / 2f, stage.getHeight() - dialog.getHeight() * 1.1f);
+                secondDialog.show(stage).setPosition(Gdx.graphics.getWidth() / 2 - label1.getWidth() / 2f, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 5.5f);
                 Constants.BROWN_CAT_ATLAS_PATH = "other/brown_cat_spritesheet.txt";
                 Constants.BROWN_CAT_RUNNING_REGION_NAMES = new String[] {"brown_cat_running1", "brown_cat_running2"};
                 Constants.BROWN_CAT_JUMPING_REGION_NAMES = new String[] {"brown_cat_jumping1",

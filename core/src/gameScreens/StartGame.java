@@ -9,7 +9,6 @@ import com.badlogic.gdx.Game;
 public class StartGame extends Game {
     @Override
     public void create() {
-        System.out.println("Start game");
         this.setScreen(new MainMenuScreen(this));
     }
 }

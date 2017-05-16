@@ -109,7 +109,6 @@ public class MainMenuScreen implements Screen {
         shopBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float x, float y) {
-                System.out.println("Shop");
                 game.setScreen(new ShopScreen(game));
             }
         });
