@@ -68,7 +68,7 @@ public class AboutScreen implements Screen {
     }
 
     private void createBackgroundForScore() {
-        sprite = new Sprite(new TextureRegion(new Texture(Gdx.files.internal("images/helpBkg.jpg"))));
+        sprite = new Sprite(new TextureRegion(new Texture(Gdx.files.internal("images/helpBkg.png"))));
     }
 
     @Override

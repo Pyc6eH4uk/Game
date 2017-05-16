@@ -113,12 +113,17 @@ public class MainMenuScreen implements Screen {
                 game.setScreen(new ShopScreen(game));
             }
         });
-        settingBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("buttons/playBtn.png")))) {
+        settingBtn = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("buttons/settingBtn.png")))) {
             @Override
             public void draw(Batch batch, float parentAlpha) {
-                setPosition(scale / 2 + settingBtn.getWidth() * scale * 1.3f, scale / 2);
-                batch.draw(settingTexture, scale / 2 + settingBtn.getWidth() * scale * 1.3f, scale / 2,
-                        settingBtn.getWidth() * scale, settingBtn.getHeight() * scale);
+//                setPosition(scale / 2 + settingBtn.getWidth() * scale * 1.3f, sale / 2);
+                setPosition(scale / 2 + playBtn.getWidth(),
+                        0 - scale * 5);
+//                batch.draw(settingTexture, scale / 2 + settingBtn.getWidth() * scale * 1.3f, scale / 2,
+//                        settingBtn.getWidth() * scale, settingBtn.getHeight() * scale);
+                batch.draw(settingTexture, scale / 2 + playBtn.getWidth(),
+                            0 - scale * 5,
+                            settingBtn.getWidth() * scale, settingBtn.getHeight() * scale);
             }
         };
         playBtn.addListener(new ClickListener() {
