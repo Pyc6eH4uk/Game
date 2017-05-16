@@ -35,42 +35,38 @@ public class ShopScreen implements Screen {
     private ImageButton backBtn, firstCatButton, secondCatButton, thirdCatButton;
     private Stage stage;
     private Skin skin;
-    private Table table;
-    private Label label;
-    private Dialog dialog;
+    private Label label, label2;
+    private Dialog dialog, secondDialog;
     private Label label1;
     private StartGame game;
     private Sprite sprite;
     private SpriteBatch batch;
     final float scaleBtn;
+    final float specialScale;
+
     public ShopScreen(StartGame game) {
         this.game = game;
         stage = new Stage(new ScreenViewport());
-        table = new Table();
         skin = new Skin(Gdx.files.internal("other/uiskin.json"));
-        dialog = new Dialog("Choisen cat:", skin);
+        dialog = new Dialog("Chosen cat:", skin);
         dialog.setMovable(false);
+        secondDialog = new Dialog("Chosen cat", skin);
+        secondDialog.setMovable(false);
         scaleBtn = stage.getHeight() / 1.5f / new Texture("images/cat1.png").getHeight();
 //        createBackButton();
         goToBackMenu();
-        label1 = new Label("First cat", skin);
+        specialScale = stage.getHeight() / 6.0f / new Texture("life/heart.png").getHeight();
+        label1 = new Label("White cat", skin);
+        label2 = new Label("Brown cat", skin);
+        label1.setScale(specialScale);
+        label2.setScale(specialScale);
+        dialog.setScale(specialScale);
+        secondDialog.setScale(specialScale);
         createCatsForUsersChoice();
         batch = new SpriteBatch();
-        setNameForShopScreen();
+//        setNameForShopScreen();
         createBackgroundForShop();
     }
-
-//    private void createBackButton() {
-//        button = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("images/backButton.jpg"))));
-//        button.setPosition(stage.getWidth() - button.getWidth(), stage.getHeight() - button.getHeight());
-//        button.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent inputEvent, float x, float y) {
-//                game.setScreen(new MainMenuScreen(game));
-//            }
-//        });
-//        stage.addActor(button);
-//    }
 
     private void createBackgroundForShop() {
         sprite = new Sprite(new TextureRegion(new Texture(Gdx.files.internal("images/backMenu.png"))));
@@ -97,8 +93,6 @@ public class ShopScreen implements Screen {
             }
         });
         stage.addActor(backBtn);
-        System.out.println(stage.getWidth() - backBtn.getWidth() * scale / 1.5f);
-        System.out.println(stage.getHeight() - backBtn.getHeight() * scale / 1.5f);
     }
     public void createCatsForUsersChoice() {
         final TextureRegion cat1Texture = new TextureRegion(new Texture("images/cat1.png"));
@@ -110,22 +104,18 @@ public class ShopScreen implements Screen {
                         firstCatButton.getWidth() * scaleBtn / 1.5f, firstCatButton.getHeight() * scaleBtn / 1.5f);
             }
         };
-//        firstCatButton.setHeight(200);
-//        firstCatButton.setWidth(200);
-//        firstCatButton.setPosition(stage.getWidth() / 3.0f - firstCatButton.getWidth(), stage.getHeight() / 1.5f - firstCatButton.getHeight());
         firstCatButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Choice cat");
                 dialog.text(label1);
-                dialog.setScale(scaleBtn);
-                dialog.setPosition(50, 50);
+                dialog.setScale(scaleBtn * 4f);
+                System.out.println(dialog.getX() + " " + dialog.getY());
                 dialog.show(stage);
+                dialog.show(stage).setPosition(stage.getWidth() / 2 - label1.getWidth() / 2, stage.getHeight() - dialog.getHeight() * 1.1f);
                 Constants.BROWN_CAT_ATLAS_PATH = "other/gray_cat_spritesheet.txt";
                 Constants.BROWN_CAT_RUNNING_REGION_NAMES = new String[] {"gray_cat_running1", "gray_cat_running2"};
                 Constants.BROWN_CAT_JUMPING_REGION_NAMES = new String[] {"gray_cat_jumping1",
                         "gray_cat_jumping2"
                 };
-//                Constants.GRAY_CAT_HIT_REGION_NAME = "brown_cat";
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
@@ -150,11 +140,10 @@ public class ShopScreen implements Screen {
         };
         secondCatButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Choice cat");
-                dialog.text(label1);
-                dialog.setScale(scaleBtn);
-                dialog.setPosition(50, 50);
-                dialog.show(stage);
+                secondDialog.text(label2);
+                secondDialog.setScale(scaleBtn * 4f);
+                secondDialog.show(stage);
+                secondDialog.show(stage).setPosition(stage.getWidth() / 2 - label1.getWidth() / 2f, stage.getHeight() - dialog.getHeight() * 1.1f);
                 Constants.BROWN_CAT_ATLAS_PATH = "other/brown_cat_spritesheet.txt";
                 Constants.BROWN_CAT_RUNNING_REGION_NAMES = new String[] {"brown_cat_running1", "brown_cat_running2"};
                 Constants.BROWN_CAT_JUMPING_REGION_NAMES = new String[] {"brown_cat_jumping1",
@@ -164,15 +153,14 @@ public class ShopScreen implements Screen {
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
-                        dialog.hide();
-                        dialog.cancel();
-                        dialog.remove();
+                        secondDialog.hide();
+                        secondDialog.cancel();
+                        secondDialog.remove();
                     }
                 }, 2);
             }
         });
 
-        //final TextureRegion cat3Texture = new TextureRegion(new Texture("images/cat3.png"));
         thirdCatButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("images/cat3.png")))) {
             @Override
             public void draw(Batch batch, float parentAlpha) {
@@ -185,7 +173,6 @@ public class ShopScreen implements Screen {
         thirdCatButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float x, float y) {
-                System.out.println("Clicked");
             }
         });
         thirdCatButton.setScale(scaleBtn);
